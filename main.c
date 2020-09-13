@@ -4,21 +4,21 @@
 #include <locale.h>
 #include <Windows.h>
 
-typedef int tData;
+typedef int tData; // хранимый тип данных
 
-typedef struct tNode
+typedef struct tNode // элемент списка
 {
     tData data;
     struct tNode *next;
 } tNode;
 
-typedef struct tList
+typedef struct tList // список
 {
     int size;
     tNode *head;
 } tList;
 
-tList * create_list(void)
+tList * create_list(void) //создание списка
 {
     tList *list = malloc(sizeof(tList));
 
@@ -52,9 +52,8 @@ void pop_front_list(tList *list) //удаление элемента из начала
     free(tmp);
     list->size -=1;
 }
-}
 
-void insert_list(tList *list, int index, tData data)
+void insert_list(tList *list, int index, tData data) // вставка элемента по индексу
 {
     if (index == 0)
     {
@@ -75,7 +74,7 @@ void insert_list(tList *list, int index, tData data)
     }
 }
 
-void removeAt_list(tList *list, int index)
+void removeAt_list(tList *list, int index) // удаление элемента по индексу
 {
     if (index == 0)
     {
@@ -96,7 +95,7 @@ void removeAt_list(tList *list, int index)
     }
 }
 
-void clear_list(tList *list)
+void clear_list(tList *list) // удаление всего списка
 {
     while(list->size)
     {
@@ -104,7 +103,7 @@ void clear_list(tList *list)
     }
 }
 
-void print_list(tList *list)
+void print_list(tList *list) // вывод списка на экран
 {
     system("cls");
     printf("Для возврата в главное меню нажмите Esc \n\n");
@@ -123,7 +122,7 @@ void print_list(tList *list)
         startMenu(1, list);
 }
 
-void add_node(tList *list)
+void add_node(tList *list) // интерфейс добавления
 {
     system("cls");
     printf("Для возврата в главное меню нажмите Esc \n");
@@ -144,7 +143,7 @@ void add_node(tList *list)
         startMenu(1, list);
 }
 
-void delete_node(tList *list)
+void delete_node(tList *list) // интерфейс удаления
 {
     system("cls");
     printf("Для возврата в главное меню нажмите Esc \n");
@@ -170,20 +169,20 @@ void delete_node(tList *list)
         startMenu(1, list);
 }
 
-void startMenu(int switcher, tList *list)
+void startMenu(int switcher, tList *list) // главное меню
 {
     system("cls");
 
     switch (switcher)//возможные типы текста на экране
     {
     case 1:
-        printf("\n     < ДОБАВИТЬ элемент в список >\n\n     УДАЛИТЬ элемент из списка\n\n     ВЫВЕСТИ список на экран");
+        printf("\n\n\n\n\n\n               < ДОБАВИТЬ элемент в список >\n\n               УДАЛИТЬ элемент из списка\n\n               ВЫВЕСТИ список на экран");
         break;
     case 2:
-        printf("\n     ДОБАВИТЬ элемент в список\n\n     < УДАЛИТЬ элемент из списка >\n\n     ВЫВЕСТИ список на экран");
+        printf("\n\n\n\n\n\n               ДОБАВИТЬ элемент в список\n\n               < УДАЛИТЬ элемент из списка >\n\n               ВЫВЕСТИ список на экран");
         break;
     case 3:
-        printf("\n     ДОБАВИТЬ элемент в список\n\n     УДАЛИТЬ элемент из списка\n\n     < ВЫВЕСТИ список на экран >");
+        printf("\n\n\n\n\n\n               ДОБАВИТЬ элемент в список\n\n               УДАЛИТЬ элемент из списка\n\n               < ВЫВЕСТИ список на экран >");
         break;
     }
     int choice = _getch(); //считанный символ
@@ -215,6 +214,7 @@ int main(void)
     setlocale(LC_ALL, "rus");
     system( "color 74" );
     system("title Связный список");
+    system("mode con cols=60 lines=20");
 
 
     tList *list = create_list();
