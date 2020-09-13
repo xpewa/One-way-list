@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1600007141 source:c:\users\xpewa\onedrive\Рабочий стол\Информатика\Односвязный список на С\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<Windows.h>
+
