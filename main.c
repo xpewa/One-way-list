@@ -41,9 +41,7 @@ void push_front_list(tList *list, tData data) //добавление элемента в начало спи
 void pop_front_list(tList *list) //удаление элемента из начала
 {
     if (list->size == 0)
-    {
         return 0;
-    }
 
     tNode *tmp = list->head;
 
@@ -56,9 +54,8 @@ void pop_front_list(tList *list) //удаление элемента из начала
 void insert_list(tList *list, int index, tData data) // вставка элемента по индексу
 {
     if (index == 0)
-    {
         push_front_list(list, data);
-    }
+
     else
     {
         tNode *previos = list->head;
@@ -77,9 +74,8 @@ void insert_list(tList *list, int index, tData data) // вставка элемента по инде
 void removeAt_list(tList *list, int index) // удаление элемента по индексу
 {
     if (index == 0)
-    {
         pop_front_list(list);
-    }
+
     else
     {
         tNode *previos = list->head;
@@ -98,9 +94,7 @@ void removeAt_list(tList *list, int index) // удаление элемента по индексу
 void clear_list(tList *list) // удаление всего списка
 {
     while(list->size)
-    {
         pop_front_list(list);
-    }
 }
 
 void print_list(tList *list) // вывод списка на экран
@@ -168,6 +162,7 @@ void delete_node(tList *list) // интерфейс удаления
 
     if (list->size == 0)
         printf("Ну и что вы собрались удалять? Ничего нет.\n");
+
     else
     {
         int index;
@@ -207,16 +202,17 @@ void startMenu(int switcher, tList *list) // главное меню
     switch (switcher)//возможные типы текста на экране
     {
     case 1:
-        printf("\n\n\n\n\n\n               < ДОБАВИТЬ элемент в список >\n\n               УДАЛИТЬ элемент из списка\n\n               ВЫВЕСТИ список на экран");
+        printf("\n\n\n\n\n\n             < ДОБАВИТЬ элемент в список >\n\n               УДАЛИТЬ элемент из списка\n\n               ВЫВЕСТИ список на экран");
         break;
     case 2:
-        printf("\n\n\n\n\n\n               ДОБАВИТЬ элемент в список\n\n               < УДАЛИТЬ элемент из списка >\n\n               ВЫВЕСТИ список на экран");
+        printf("\n\n\n\n\n\n               ДОБАВИТЬ элемент в список\n\n             < УДАЛИТЬ элемент из списка >\n\n               ВЫВЕСТИ список на экран");
         break;
     case 3:
-        printf("\n\n\n\n\n\n               ДОБАВИТЬ элемент в список\n\n               УДАЛИТЬ элемент из списка\n\n               < ВЫВЕСТИ список на экран >");
+        printf("\n\n\n\n\n\n               ДОБАВИТЬ элемент в список\n\n               УДАЛИТЬ элемент из списка\n\n             < ВЫВЕСТИ список на экран >");
         break;
     }
-    int choice; //считанный символ
+
+    int choice = -1; //считанный символ
     while (choice != 224 || choice != 0 || choice != 72 || choice != 80 || choice != 13 || choice != 32)
     {
         choice = _getch();
@@ -247,10 +243,9 @@ void startMenu(int switcher, tList *list) // главное меню
 int main(void)
 {
     setlocale(LC_ALL, "rus");
-    system( "color 74" );
+    system("color 74");
     system("title Связный список");
     system("mode con cols=60 lines=20");
-
     HANDLE hCons = GetStdHandle(STD_OUTPUT_HANDLE);//получение хендла
     CONSOLE_CURSOR_INFO cursor = { 100, 0 };//число от 1 до 100 размер курсора в процентах; false\true - видимость
     SetConsoleCursorInfo(hCons, &cursor);//применение заданных параметров курсора
