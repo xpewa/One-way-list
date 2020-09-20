@@ -1,8 +1,8 @@
-*cbp
-*depend
-*layout
-*gitattributes
-*gitignore
+*.cbp
+*.depend
+*.layout
+*.gitattributes
+*.gitignore
 
 # Prerequisites
 *.d
