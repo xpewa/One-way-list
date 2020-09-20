@@ -1,3 +1,9 @@
+*cbp
+*depend
+*layout
+*gitattributes
+*gitignore
+
 # Prerequisites
 *.d
 
