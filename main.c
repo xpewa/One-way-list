@@ -100,7 +100,7 @@ void clear_list(tList *list)
 void print_list(tList *list)
 {
     system("cls");
-    printf("Для возврата в главное меню нажмите Esc \n"
+    printf("Press to return to the main menu Esc \n"
            "____________________________________________________________\n");
 
     int i = 1;
@@ -124,27 +124,27 @@ void print_list(tList *list)
 void add_node(tList *list)
 {
     system("cls");
-    printf("Для возврата в главное меню нажмите Esc \n"
+    printf("Press to return to the main menu Esc \n"
            "____________________________________________________________\n");
 
     int index = -1;
-    printf("Введите номер элемента в промежутке [1;%d] \n", list->size+1);
+    printf("Enter the item number in between [1;%d] \n", list->size+1);
     while (scanf("%d", &index) != 1 || index < 1 || index > list->size+1)
     {
         scanf("%*[^\n]");
-        printf("Вы не справились! Введите номер элемента в ПРОМЕЖУТКЕ [1;%d] \n", list->size+1);
+        printf("You have failed! Enter the item number in [1;%d] \n", list->size+1);
     }
 
     int data;
-    printf("Введите данные (число) \n");
+    printf("Enter data (number) \n");
     while (scanf("%d", &data) != 1)
     {
-        printf("Введите данные (ЧИСЛО) \n");
+        printf("Enter data (number) \n");
         scanf("%*[^\n]");
     }
 
     insert_list(list, index-1, data);
-    printf("Элемент списка успешно добавлен!");
+    printf("List item added successfully!");
 
     int choice;
     while (choice != 27)
@@ -158,32 +158,32 @@ void add_node(tList *list)
 void delete_node(tList *list)
 {
     system("cls");
-    printf("Для возврата в главное меню нажмите Esc \n"
+    printf("Press to return to the main menu Esc \n"
            "____________________________________________________________\n");
 
     if (list->size == 0)
-        printf("Ну и что вы собрались удалять? Ничего нет.\n");
+        printf("So what are you going to delete? There is nothing.\n");
 
     else
     {
         int index;
-        printf("Введите номер элемента в промежутке [1;%d] \n", list->size);
-        printf("Если вы хотите удалить весь список, введите 0 \n");
+        printf("Enter the item number in between [1;%d] \n", list->size);
+        printf("If you want to delete the entire list, enter 0 \n");
         while (scanf("%d", &index) != 1 || index < 0 || index > list->size)
         {
             scanf("%*[^\n]");
-            printf("Вы не справились! Введите номер элемента в ПРОМЕЖУТКЕ [1;%d] \n", list->size);
+            printf("You have failed! Enter the item number in [1;%d] \n", list->size);
         }
 
         if (index == 0)
         {
             clear_list(list);
-            printf("Cписок успешно удалён!");
+            printf("List successfully deleted!");
         }
         else
         {
             removeAt_list(list, index-1);
-            printf("Элемент списка успешно удалён!");
+            printf("List item deleted successfully!");
         }
     }
 
@@ -203,13 +203,13 @@ void startMenu(int switcher, tList *list)
     switch (switcher)
     {
     case 1:
-        printf("\n\n\n\n\n\n             < ДОБАВИТЬ элемент в список >\n\n               УДАЛИТЬ элемент из списка\n\n               ВЫВЕСТИ список на экран");
+        printf("\n\n\n\n\n\n             < ADD item to list >\n\n               REMOVE an item from a list\n\n               DISPLAY the list");
         break;
     case 2:
-        printf("\n\n\n\n\n\n               ДОБАВИТЬ элемент в список\n\n             < УДАЛИТЬ элемент из списка >\n\n               ВЫВЕСТИ список на экран");
+        printf("\n\n\n\n\n\n               ADD item to list\n\n             < REMOVE an item from a list >\n\n               DISPLAY the list");
         break;
     case 3:
-        printf("\n\n\n\n\n\n               ДОБАВИТЬ элемент в список\n\n               УДАЛИТЬ элемент из списка\n\n             < ВЫВЕСТИ список на экран >");
+        printf("\n\n\n\n\n\n               ADD item to list\n\n               REMOVE an item from a list\n\n             < DISPLAY the list >");
         break;
     }
 
@@ -245,11 +245,11 @@ int main(void)
 {
     setlocale(LC_ALL, "rus");
     system("color 74");
-    system("title Связный список");
+    system("title One-way-list");
     system("mode con cols=60 lines=20");
     HANDLE hCons = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cursor = { 100, 0 };
-    SetConsoleCursorInfo(hCons, &cursor);/
+    SetConsoleCursorInfo(hCons, &cursor);
 
 
     tList *list = create_list();
