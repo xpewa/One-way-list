@@ -4,21 +4,21 @@
 #include <locale.h>
 #include <Windows.h>
 
-typedef int tData; // хранимый тип данных
+typedef int tData;
 
-typedef struct tNode // элемент списка
+typedef struct tNode
 {
     tData data;
     struct tNode *next;
 } tNode;
 
-typedef struct tList // список
+typedef struct tList
 {
     int size;
     tNode *head;
 } tList;
 
-tList * create_list(void) //создание списка
+tList * create_list(void)
 {
     tList *list = malloc(sizeof(tList));
 
@@ -28,7 +28,7 @@ tList * create_list(void) //создание списка
     return list;
 }
 
-void push_front_list(tList *list, tData data) //добавление элемента в начало списка
+void push_front_list(tList *list, tData data)
 {
     tNode *Node = malloc(sizeof(tNode));
     Node->data = data;
@@ -38,7 +38,7 @@ void push_front_list(tList *list, tData data) //добавление элемента в начало спи
     list->size += 1;
 }
 
-void pop_front_list(tList *list) //удаление элемента из начала
+void pop_front_list(tList *list)
 {
     if (list->size == 0)
         return 0;
@@ -51,7 +51,7 @@ void pop_front_list(tList *list) //удаление элемента из начала
     list->size -=1;
 }
 
-void insert_list(tList *list, int index, tData data) // вставка элемента по индексу
+void insert_list(tList *list, int index, tData data)
 {
     if (index == 0)
         push_front_list(list, data);
@@ -71,7 +71,7 @@ void insert_list(tList *list, int index, tData data) // вставка элемента по инде
     }
 }
 
-void removeAt_list(tList *list, int index) // удаление элемента по индексу
+void removeAt_list(tList *list, int index)
 {
     if (index == 0)
         pop_front_list(list);
@@ -91,19 +91,19 @@ void removeAt_list(tList *list, int index) // удаление элемента по индексу
     }
 }
 
-void clear_list(tList *list) // удаление всего списка
+void clear_list(tList *list)
 {
     while(list->size)
         pop_front_list(list);
 }
 
-void print_list(tList *list) // вывод списка на экран
+void print_list(tList *list)
 {
     system("cls");
     printf("Для возврата в главное меню нажмите Esc \n"
            "____________________________________________________________\n");
 
-    int i = 1;//для распечатки
+    int i = 1;
     tNode *print_node = list->head;
     while (print_node != NULL)
     {
@@ -116,12 +116,12 @@ void print_list(tList *list) // вывод списка на экран
     while (choice != 27)
     {
         choice = _getch();
-        if (choice == 27)//если Escape
+        if (choice == 27)
             startMenu(1, list);
     }
 }
 
-void add_node(tList *list) // интерфейс добавления
+void add_node(tList *list)
 {
     system("cls");
     printf("Для возврата в главное меню нажмите Esc \n"
@@ -131,9 +131,7 @@ void add_node(tList *list) // интерфейс добавления
     printf("Введите номер элемента в промежутке [1;%d] \n", list->size+1);
     while (scanf("%d", &index) != 1 || index < 1 || index > list->size+1)
     {
-        scanf("%*[^\n]");//пропустить символы(присвоить никуда) кроме конца строки
-        //fflush(stdin);//очищает буфер (поток ввода). Из буфера удаляются прочитанные символы.
-        //В Линукс лучше не использовать - работает неопределённо
+        scanf("%*[^\n]");
         printf("Вы не справились! Введите номер элемента в ПРОМЕЖУТКЕ [1;%d] \n", list->size+1);
     }
 
@@ -152,12 +150,12 @@ void add_node(tList *list) // интерфейс добавления
     while (choice != 27)
     {
         choice = _getch();
-        if (choice == 27)//если Escape
+        if (choice == 27)
             startMenu(1, list);
     }
 }
 
-void delete_node(tList *list) // интерфейс удаления
+void delete_node(tList *list)
 {
     system("cls");
     printf("Для возврата в главное меню нажмите Esc \n"
@@ -193,16 +191,16 @@ void delete_node(tList *list) // интерфейс удаления
     while (choice != 27)
     {
         choice = _getch();
-        if (choice == 27)//если Escape
+        if (choice == 27)
             startMenu(1, list);
     }
 }
 
-void startMenu(int switcher, tList *list) // главное меню
+void startMenu(int switcher, tList *list)
 {
     system("cls");
 
-    switch (switcher)//возможные типы текста на экране
+    switch (switcher)
     {
     case 1:
         printf("\n\n\n\n\n\n             < ДОБАВИТЬ элемент в список >\n\n               УДАЛИТЬ элемент из списка\n\n               ВЫВЕСТИ список на экран");
@@ -215,23 +213,23 @@ void startMenu(int switcher, tList *list) // главное меню
         break;
     }
 
-    int choice = -1; //считанный символ
+    int choice = -1;
     while (choice != 224 || choice != 0 || choice != 72 || choice != 80 || choice != 13 || choice != 32)
     {
         choice = _getch();
-        if (choice == 224 || choice == 0)//любая стрелка
+        if (choice == 224 || choice == 0)
             choice = _getch();
-        if (choice == 72)//вверх
+        if (choice == 72)
             if (switcher != 1)
                 startMenu(switcher - 1, list);
             else
                 startMenu(3, list);
-        if (choice == 80)//вниз
+        if (choice == 80)
             if (switcher != 3)
                 startMenu(switcher + 1, list);
             else
                 startMenu(1, list);
-        if (choice == 13 || choice == 32) //пробел
+        if (choice == 13 || choice == 32)
         {
             if (switcher == 1)
                 add_node(list);
@@ -249,9 +247,9 @@ int main(void)
     system("color 74");
     system("title Связный список");
     system("mode con cols=60 lines=20");
-    HANDLE hCons = GetStdHandle(STD_OUTPUT_HANDLE);//получение хендла
-    CONSOLE_CURSOR_INFO cursor = { 100, 0 };//число от 1 до 100 размер курсора в процентах; false\true - видимость
-    SetConsoleCursorInfo(hCons, &cursor);//применение заданных параметров курсора
+    HANDLE hCons = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cursor = { 100, 0 };
+    SetConsoleCursorInfo(hCons, &cursor);/
 
 
     tList *list = create_list();
